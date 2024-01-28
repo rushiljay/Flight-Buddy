@@ -10,7 +10,8 @@ export default function App() {
 
 
     <View style={styles.container}>
-      <TextInput defaultValue="Hello, I am your digital flight assistant! Let me know what you need, and I will be happy to help!"/>
+      <Text>Hello, I am your digital flight attendant! Let me know what you need!</Text>
+      <TextInput defaultValue="Enter your message here"/>
       <Button title="Submit" color="blue"/>
       <StatusBar style="auto" />
     </View>
@@ -21,7 +22,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#34deeb',
     alignItems: 'center',
     justifyContent: 'center',
     height: 850

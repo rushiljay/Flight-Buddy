@@ -10,5 +10,5 @@ print(response.json())
 
 # Getting flight data by day
 response = requests.get(flight_api_url + 'flights?date=2017-08-29')
-flight_data = pd.read_csv()
+# flight_data = pd.read_csv()
 print(response.json())

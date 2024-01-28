@@ -1,9 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Button, State } from 'react-native';
 
-import Big from './components/big.jsx';
+// This will be the url to call the api
+const url = 'http://127.0.0.1:8000/'
 
+// This is the text that the user inputs to the AI
+const inputtedText = ''
 
+const [userInput, setUserInput] = useState('')
+
+const onChangeText = () => {
+  getAIResponse()
+}
 
 export default function App() {
   return (
@@ -13,7 +21,7 @@ export default function App() {
 
     <View style={styles.container}>
       <Text>Hello, I am your digital flight attendant! Let me know what you need!</Text>
-      <TextInput style={styles.textbox} defaultValue="Enter your message here"/>
+      <TextInput style={styles.textbox} onChangeTextdefaultValue="Enter your message here"/>
       
       <Button title="Submit" color="blue"/>
       <StatusBar style="auto" />
@@ -43,12 +51,6 @@ const styles = StyleSheet.create({
   }
 
 });
-
-// This will be the url to call the api
-const url = 'https://discord.com/channels/@me/1175558898472730715/1201095457108144239'
-// This is the text that the user inputs to the AI
-const inputtedText = ''
-
 
 const getAIResponse = () => {
   fetch(url + '/' + query, {method: 'GET', body: inputtedText});

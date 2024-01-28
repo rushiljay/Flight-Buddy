@@ -4,16 +4,6 @@ import ollama
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-flight_api_url = 'https://flight-buddy-ec24703f32e0.herokuapp.com/'
-
-response = requests.get(flight_api_url + 'flights?date=2017-08-29')
-
-response_text = ''
-
-for i in range(len(response.json())):
-    if (response.json()[i]['origin']['code'] == 'JFK' and response.json()[i]['destination']['code'] == 'SFO'):
-        response_text += response.json()[i])
-
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -33,6 +23,11 @@ def query(question):
     {
         'role': 'assistant',
         'content': '''
+
+        Flight Duration:  6hrs and 50 minutes
+        Current Location: Atlantic Ocean
+        Speed: 643 mph
+
         Estimated Wait Time for Bathrooms:
 
     Wait Times for Bathrooms: The best times to use the bathroom are after meal service, before drink service, mid-flight on long-haul flights, and avoiding the beginning and end of the flight. Watch for natural lulls in bathroom use and listen to announcements from the crew.
@@ -100,9 +95,7 @@ Non-Lactose Meal: Grilled Shrimp with Wild Rice
 Vegetarian Jain Meal: Stir-Fried Vegetables with Saffron Rice
 Drinks and Snacks: In addition to the Economy options, Business Class offers a selection of premium wines and spirits. Snacks include gourmet cheese platters and more upscale options.
 
-    RULE: Limit responses to 25 words.
-    -----
-
+RULE: Response Length is Limited
     '''
     },
     {
@@ -110,4 +103,4 @@ Drinks and Snacks: In addition to the Economy options, Business Class offers a s
         'content': question
     }
     ])
-    return {response['message']['content']}
+    return {'result': response['message']['content']}

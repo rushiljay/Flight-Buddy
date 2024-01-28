@@ -7,23 +7,13 @@ import React, { useState } from 'react';
 export default function App() {
   const [inputText, setInputText] = useState(''); // State to store user input
   const [outputText, setOutputText] = useState(''); // State to store API response
-  const url = 'http://127.0.0.1:8000/'
+  const url = 'http://localhost:8000/'
 
-  async function callAPI (){
-    const outputTextJson = await fetch(url, {
-      method: "GET",
-      body: encodeURI(inputText)
-    }).json();
-    setOutputText(outputTextJson);
-  }
 
   const requestData = async () => {
-    try {
-      const response = await fetch(url+encodeURIComponent(inputText));
-      const data = await response.js
-    } catch (error) {
-      console.error("Error!!!");
-    }
+      const response = await fetch(url+encodeURI(inputText));
+      const data = await response.json();
+      setOutputText(JSON.stringify(data.result));
   }
 
   return (
@@ -31,13 +21,17 @@ export default function App() {
     <View style={style.view}>
       <Image source={{uri:'https://1000logos.net/wp-content/uploads/2016/10/American-Airlines-Logo.png'}}/>
       <Text style={style.title}>Attendr</Text>
-      <TextInput style={style.input} multiline={true} onChange={text => setInputText(text)}/>
+      <TextInput style={style.input} multiline={true} onChangeText={text => setInputText(text)}/>
       <Button
-      onPress = {callAPI}
+      onPress = {requestData}
       title = "Submit"
       color = "white"
       />
-      <Text>{outputText}</Text>
+      {outputText.split('\n').map((line, index) => (
+    <Text key={index} style={style.output}>
+      {line.replace(/["\\]/g, '').trim()}
+    </Text>
+  ))}
 
     </View>
   );
@@ -51,10 +45,10 @@ const style = StyleSheet.create({
   view: {
     fontFamily: 'Helvetica Neue',
     flex: 1,
+    flexGrow: 1,
     paddingTop: 75,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    borderWidth: 2,
     backgroundColor: '#0D73B1',
   },
   input: {
@@ -69,7 +63,11 @@ const style = StyleSheet.create({
     borderColor: '#36495A',
     color: 'white',
   },
-  submitButton: {
-
-  }
-})
+  output: {
+    fontSize: 15,
+    padding: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    width: '80%',
+    color: 'white',
+  }});

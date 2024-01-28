@@ -1,5 +1,5 @@
 import requests
-import pandas
+import pandas as pd
 
 flight_api_url = 'https://flight-buddy-ec24703f32e0.herokuapp.com/'
 
@@ -10,5 +10,7 @@ print(response.json())
 
 # Getting flight data by day
 response = requests.get(flight_api_url + 'flights?date=2017-08-29')
-# flight_data = pd.read_csv()
-print(response.json())
+
+for i in range(len(response.json())):
+    if (response.json()[i]['origin']['code'] == 'JFK' and response.json()[i]['destination']['code'] == 'SFO'):
+        print(response.json()[i])

@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, ScrollView, TextInput, Button } from 'react-nat
 
 import Big from './components/big.jsx';
 
+
+
 export default function App() {
   return (
     <ScrollView>
@@ -40,3 +42,13 @@ const styles = StyleSheet.create({
   }
 
 });
+
+// This will be the url to call the api
+const url = 'https://discord.com/channels/@me/1175558898472730715/1201095457108144239'
+// This is the text that the user inputs to the AI
+const inputtedText = ''
+
+
+const getAIResponse = () => {
+  fetch(url + '/' + query, {method: 'GET', body: inputtedText});
+};

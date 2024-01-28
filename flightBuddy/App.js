@@ -9,6 +9,7 @@ export default function App() {
   const [outputText, setOutputText] = useState(''); // State to store API response
 
   return (
+
     <View style={style.view}>
       <TextInput style={style.input} multiline={true}/>
     </View>

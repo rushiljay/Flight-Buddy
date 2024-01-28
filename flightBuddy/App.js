@@ -12,6 +12,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>Hello, I am your digital flight attendant! Let me know what you need!</Text>
       <TextInput style={styles.textbox} defaultValue="Enter your message here"/>
+      
       <Button title="Submit" color="blue"/>
       <StatusBar style="auto" />
     </View>

@@ -17,6 +17,15 @@ export default function App() {
     setOutputText(outputTextJson);
   }
 
+  const requestData = async () => {
+    try {
+      const response = await fetch(url+encodeURIComponent(inputText));
+      const data = await response.js
+    } catch (error) {
+      console.error("Error!!!");
+    }
+  }
+
   return (
 
     <View style={style.view}>

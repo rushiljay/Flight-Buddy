@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TextInput, Button } from 'react-native';
 import React, { useState } from 'react';
 
 // Assuming 'Big' component is not related to the query functionality
@@ -14,19 +14,22 @@ export default function App() {
       method: "GET",
       body: encodeURI(inputText)
     }).json();
-    outputText = outputTextJson;
+    setOutputText(outputTextJson);
   }
 
   return (
 
     <View style={style.view}>
+      <Image source={{uri:'https://1000logos.net/wp-content/uploads/2016/10/American-Airlines-Logo.png'}}/>
       <Text style={style.title}>Attendr</Text>
-      <TextInput style={style.input} multiline={true}/>
+      <TextInput style={style.input} multiline={true} onChange={text => setInputText(text)}/>
       <Button
       onPress = {callAPI}
       title = "Submit"
       color = "white"
       />
+      <Text>{outputText}</Text>
+
     </View>
   );
 }
@@ -34,14 +37,16 @@ export default function App() {
 const style = StyleSheet.create({
   title: {
     fontSize: 50,
-    color: 'red'
+    color: '9DA6AB'
   },
   view: {
+    fontFamily: 'Helvetica Neue',
     flex: 1,
-    justifyContent: 'center',
+    paddingTop: 75,
+    justifyContent: 'flex-start',
     alignItems: 'center',
     borderWidth: 2,
-    backgroundColor: '#0078D2',
+    backgroundColor: '#0D73B1',
   },
   input: {
     fontSize: 20,

@@ -1,6 +1,18 @@
+import requests
+import pandas as pd
 import ollama
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+flight_api_url = 'https://flight-buddy-ec24703f32e0.herokuapp.com/'
+
+response = requests.get(flight_api_url + 'flights?date=2017-08-29')
+
+response_text = ''
+
+for i in range(len(response.json())):
+    if (response.json()[i]['origin']['code'] == 'JFK' and response.json()[i]['destination']['code'] == 'SFO'):
+        response_text += response.json()[i])
 
 app = FastAPI()
 app.add_middleware(

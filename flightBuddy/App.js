@@ -7,16 +7,35 @@ import React, { useState } from 'react';
 export default function App() {
   const [inputText, setInputText] = useState(''); // State to store user input
   const [outputText, setOutputText] = useState(''); // State to store API response
+  const url = 'http://127.0.0.1:8000/'
+
+  async function callAPI (){
+    const outputTextJson = await fetch(url, {
+      method: "GET",
+      body: encodeURI(inputText)
+    }).json();
+    outputText = outputTextJson;
+  }
 
   return (
 
     <View style={style.view}>
+      <Text style={style.title}>Attendr</Text>
       <TextInput style={style.input} multiline={true}/>
+      <Button
+      onPress = {callAPI}
+      title = "Submit"
+      color = "white"
+      />
     </View>
   );
 }
 
 const style = StyleSheet.create({
+  title: {
+    fontSize: 50,
+    color: 'red'
+  },
   view: {
     flex: 1,
     justifyContent: 'center',
@@ -36,4 +55,7 @@ const style = StyleSheet.create({
     borderColor: '#36495A',
     color: 'white',
   },
+  submitButton: {
+
+  }
 })
